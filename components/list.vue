@@ -59,6 +59,11 @@ export default {
             let data = res.data.result
             let has_next = res.data.has_next
             if(data.length > 0){
+                // data already exist
+                if(!!this.items.find(i => i.id == data[0].id)){
+                    this.$data.page = -1
+                    return
+                }
                 if(has_next)
                     this.$data.page++
                 else

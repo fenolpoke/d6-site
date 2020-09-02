@@ -57,7 +57,7 @@
           <v-select
             v-model="items[TYPES.NEWS].selected.category"
             @input="setCategoryId"
-            :items="categories"
+            :items="items[TYPES.CATEGORIES].items"
             item-text="name"
             item-value="id"
             label="Select Category"
@@ -155,7 +155,7 @@
         [TYPES.CATEGORIES]: {
           apiUrl: 'categories',
           titleFields: ['name'],
-          items: [],
+          items: categories,
           selected: null,
           dialog: false
         }
@@ -166,8 +166,7 @@
           action: '',
           submitting: false,
           tab: null,
-          items: tabs,
-          categories,
+          items: tabs
         }
     },
     methods: {
@@ -187,7 +186,7 @@
               }
               if(type == TYPES.NEWS){
                 this.$data.items[type].selected.category = 
-                  this.$data.categories.filter(c => c.id == item.category_id)[0]
+                  this.$data.items[TYPES.CATEGORIES].items.filter(c => c.id == item.category_id)[0]
               }
               this.$data.items[type].dialog = true
             })
